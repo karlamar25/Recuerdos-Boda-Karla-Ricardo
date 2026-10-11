@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#5c6b49">
 
-    <title>Karla & Ricardo | Captura el amor</title>
+    <meta name="theme-color" content="#f5f0e6">
+    <meta name="description"
+          content="Comparte tus fotografías y videos de la boda de Karla y Ricardo.">
+
+    <title>Karla & Ricardo | Nuestros recuerdos</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Dancing+Script:wght@400;500&display=swap"
+          rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -14,114 +23,160 @@
 
     <main class="pagina">
 
-        <header class="encabezado">
-            <h1>Karla <span>&</span> Ricardo</h1>
+        <!-- PORTADA FOTOGRÁFICA -->
 
-            <p class="fecha">
-                Diciembre 5, 2026
+        <section class="portada" aria-label="Karla y Ricardo">
+
+            <div class="portada-foto"></div>
+
+            <div class="portada-contenido">
+
+                <p class="portada-frase">
+                    Nuestra historia
+                </p>
+
+                <h1>
+                    Karla <span>&</span> Ricardo
+                </h1>
+
+                <p class="fecha">
+                    05 · DICIEMBRE · 2026
+                </p>
+
+                <div class="adorno-portada" aria-hidden="true">
+                    ❧
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TARJETA PRINCIPAL -->
+
+        <section class="tarjeta">
+
+            <p class="sobrelinea">
+                UN DÍA ESPECIAL
             </p>
-        </header>
 
-        <div class="camara" aria-hidden="true">
+            <h2 class="titulo-tarjeta">
+                merece recuerdos para toda la vida.
+            </h2>
 
-            <svg viewBox="0 0 220 160"
-                 xmlns="http://www.w3.org/2000/svg"
-                 fill="none">
+            <div class="separador" aria-hidden="true">
+                <span></span>
+                <span class="ramita">❧</span>
+                <span></span>
+            </div>
 
-                <g stroke="currentColor"
-                   stroke-width="2.5"
-                   stroke-linecap="round"
-                   stroke-linejoin="round">
+            <p class="mensaje">
+                Queremos volver a vivir cada instante de nuestra boda
+                a través de sus ojos.
+            </p>
 
-                    <path d="M28 42h35l9-12h32l10 12h37c6 0 10 4 10 10v67c0 6-4 10-10 10H28c-6 0-10-4-10-10V52c0-6 4-10 10-10Z"/>
+            <p class="mensaje secundario">
+                Compartan con nosotros las fotografías y los videos
+                que capturaron durante este día tan especial.
+            </p>
 
-                    <path d="M73 30v-9h36v9"/>
 
-                    <path d="M22 60h143"/>
+            <!-- BOTÓN DE SELECCIÓN DE ARCHIVOS -->
 
-                    <circle cx="98" cy="83" r="34"/>
-                    <circle cx="98" cy="83" r="25"/>
-                    <circle cx="98" cy="83" r="15"/>
-                    <circle cx="98" cy="83" r="6"/>
+            <button
+                class="boton-subida"
+                id="seleccionar-archivos"
+                type="button"
+                aria-label="Seleccionar fotografías y videos">
 
-                    <path d="M31 35v-8h18v8"/>
-                    <path d="M140 35v-8h18v8"/>
+                <span class="icono-subida" aria-hidden="true">
 
-                    <ellipse cx="40" cy="27" rx="9" ry="3.5"/>
-                    <ellipse cx="149" cy="27" rx="9" ry="3.5"/>
+                    <svg viewBox="0 0 48 48"
+                         xmlns="http://www.w3.org/2000/svg"
+                         fill="none">
 
-                </g>
+                        <path
+                            d="M13 34H10a8 8 0 0 1 0-16
+                               14 14 0 0 1 27-2
+                               9 9 0 0 1 1 18h-4"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"/>
 
-            </svg>
+                        <path
+                            d="M24 40V22m0 0-7 7m7-7 7 7"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"/>
 
-        </div>
+                    </svg>
 
-        <p class="mensaje">
-            ¡Comparte con nosotros las fotografías y videos
-            de este día tan especial!
-        </p>
+                </span>
 
-        <div class="separador"></div>
+                <span class="texto-boton">
 
-        <button
-            class="boton-subida"
-            id="seleccionar-archivos"
-            type="button">
+                    <strong>
+                        COMPARTIR MIS RECUERDOS
+                    </strong>
 
-            <svg viewBox="0 0 52 52"
-                 fill="none"
-                 aria-hidden="true">
+                    <small>
+                        FOTOGRAFÍAS Y VIDEOS
+                    </small>
 
-                <path
-                    d="M15 36H12a9 9 0 0 1-1-18 15 15 0 0 1 29-1 10 10 0 0 1 1 19h-4"
-                    stroke="currentColor"
-                    stroke-width="2.4"
-                    stroke-linecap="round"/>
+                </span>
 
-                <path
-                    d="M26 43V23m0 0-8 8m8-8 8 8"
-                    stroke="currentColor"
-                    stroke-width="2.4"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"/>
+                <span class="flecha" aria-hidden="true">
+                    →
+                </span>
 
-            </svg>
+            </button>
 
-            <span class="texto-boton">
 
-                <strong>
-                    SELECCIONA FOTOS Y VIDEOS
-                </strong>
+            <input
+                id="archivos"
+                type="file"
+                accept="image/*,video/*"
+                multiple
+                hidden>
 
-                <small>
-                    PUEDES SELECCIONAR VARIOS ARCHIVOS
-                </small>
 
-            </span>
+            <p class="nota-archivos">
+                Puedes seleccionar varios archivos a la vez.
+            </p>
 
-        </button>
+            <p
+                id="estado-archivos"
+                class="estado-archivos"
+                aria-live="polite">
+            </p>
 
-        <input
-            id="archivos"
-            type="file"
-            accept="image/*,video/*"
-            multiple
-            hidden>
 
-        <p class="agradecimiento">
-            Gracias por ser parte de nuestra historia
-        </p>
+            <!-- MENSAJE FINAL -->
 
-        <div class="monograma" aria-hidden="true">
+            <div class="adorno-final" aria-hidden="true">
+                <span></span>
+                <span>❧</span>
+                <span></span>
+            </div>
 
-            <span class="letra-k">K</span>
-            <span class="letra-r">R</span>
+            <p class="agradecimiento">
+                Gracias por formar parte
+                <br>
+                de nuestra historia de amor.
+            </p>
 
-            <span class="flor">✿</span>
+            <p class="firma">
+                Con cariño, Karla & Ricardo
+            </p>
 
-        </div>
+        </section>
 
-        <p id="estado-archivos" aria-live="polite"></p>
+
+        <footer class="pie">
+            KARLA & RICARDO · 05.12.2026
+        </footer>
 
     </main>
 
