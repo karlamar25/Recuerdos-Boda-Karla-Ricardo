@@ -125,12 +125,12 @@ main {
 }
 
 .mensaje-texto {
-    max-width: 480px;
+    max-width: 400px;
     margin: 0 auto;
     color: var(--texto);
-    font-size: clamp(22px, 3.5vw, 27px);
+    font-size: clamp(17px, 2.8vw, 21px);
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 1.4;
 }
 
 
@@ -139,34 +139,19 @@ main {
 ========================================= */
 
 .recuerdos {
-    padding: 8px 30px 48px;
+    padding: 0 20px 25px;
     background: var(--marfil);
     text-align: center;
 }
 
 .cuadro-subida {
     width: 100%;
-    max-width: 500px;
+    max-width: 420px;
     margin: 0 auto;
-    padding: 36px 28px 30px;
+    padding: 22px 20px;
     border: 1px solid #d9cfbb;
     background: var(--marfil-claro);
     text-align: center;
-}
-
-/* Icono de fotografías */
-
-.icono-fotografia {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 20px;
-    border: 1px solid #d8ceb8;
-    border-radius: 50%;
-    color: var(--olivo);
-    font-size: 27px;
 }
 
 .btn-recuerdos {
@@ -176,10 +161,10 @@ main {
     gap: 13px;
 
     width: 100%;
-    min-height: 65px;
+    min-height: 55px;
     margin: 0 auto;
 
-    padding: 16px 20px;
+    padding: 12px 16px;
     border: 1px solid var(--olivo);
     border-radius: 2px;
 
