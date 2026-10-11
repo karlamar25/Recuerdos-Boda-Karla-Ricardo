@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Dancing+Script:wght@400;500&display=swap');
+
+:root {
+    --verde-olivo: #5c6b49;
+    --crema: #e9dfb0;
+    --crema-claro: #eee5bc;
+    --linea: rgba(231, 223, 176, 0.24);
+    --boton: #c9d1d8;
+    --texto-boton: #11140f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--verde-olivo);
+    color: var(--crema);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.pagina {
+    min-height: 100vh;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 10px 22px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.encabezado h1 {
+    margin: 0;
+    font-family: 'Dancing Script', cursive;
+    font-weight: 400;
+    font-size: clamp(39px, 6vw, 58px);
+    line-height: 1.2;
+    color: var(--crema);
+}
+
+.encabezado h1 span {
+    padding: 0 0.08em;
+}
+
+.fecha {
+    margin: 25px 0 0;
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(18px, 2.6vw, 23px);
+    font-style: italic;
+    letter-spacing: 0.05em;
+    color: var(--crema);
+}
+
+.camara {
+    margin-top: clamp(55px, 8.5vw, 95px);
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #171a13;
+}
+
+.camara svg {
+    width: 220px;
+    max-width: 60vw;
+    height: 160px;
+}
+
+.mensaje {
+    margin: 46px 0 31px;
+    color: var(--crema-claro);
+    font-size: clamp(22px, 3.2vw, 32px);
+    line-height: 1.05;
+    font-weight: 500;
+}
+
+.separador {
+    width: calc(100% + 44px);
+    height: 1px;
+    background: var(--linea);
+}
+
+.boton-subida {
+    margin-top: 29px;
+    width: min(420px, 90vw);
+    min-height: 134px;
+    padding: 18px 22px;
+    border: none;
+    border-radius: 100px;
+    background: var(--boton);
+    color: var(--texto-boton);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: transform 0.18s, filter 0.18s;
+}
+
+.boton-subida:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.03);
+}
+
+.boton-subida:focus-visible {
+    outline: 3px solid var(--crema);
+    outline-offset: 4px;
+}
+
+.boton-subida svg {
+    width: 55px;
+    height: 55px;
+    flex-shrink: 0;
+}
+
+.texto-boton {
+    display: flex;
+    flex-direction: column;
+    gap: 29px;
+    align-items: center;
+}
+
+.texto-boton strong {
+    font: 600 16px Arial, Helvetica, sans-serif;
+    letter-spacing: -0.025em;
+}
+
+.texto-boton small {
+    font: 600 13px Arial, Helvetica, sans-serif;
+}
+
+.agradecimiento {
+    margin: 96px 0 0;
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(18px, 2.5vw, 23px);
+    font-style: italic;
+    letter-spacing: 0.08em;
+    color: var(--crema);
+}
+
+.monograma {
+    width: 150px;
+    height: 160px;
+    position: relative;
+    margin-top: 75px;
+    flex-shrink: 0;
+    color: var(--crema-claro);
+}
+
+.letra-k,
+.letra-r {
+    position: absolute;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 400;
+    font-size: 83px;
+    line-height: 1;
+}
+
+.letra-k {
+    left: 14px;
+    top: 0;
+}
+
+.letra-r {
+    right: 14px;
+    top: 72px;
+}
+
+.flor {
+    position: absolute;
+    left: 37px;
+    top: -5px;
+    font-size: 65px;
+    color: #f4efd6;
+}
+
+#estado-archivos {
+    width: min(420px, 90vw);
+    margin-top: 18px;
+    color: var(--crema-claro);
+    font: 12px/1.5 Arial, sans-serif;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+    .pagina {
+        padding: 14px 16px 0;
+    }
+
+    .encabezado h1 {
+        font-size: clamp(38px, 10vw, 49px);
+    }
+
+    .fecha {
+        margin-top: 20px;
+    }
+
+    .camara {
+        margin-top: 56px;
+        height: 150px;
+    }
+
+    .camara svg {
+        width: 190px;
+        height: 145px;
+    }
+
+    .mensaje {
+        margin: 35px 0 28px;
+        font-size: clamp(21px, 5.4vw, 27px);
+    }
+
+    .boton-subida {
+        min-height: 112px;
+        width: min(420px, 94vw);
+        padding: 14px 16px;
+        gap: 10px;
+    }
+
+    .boton-subida svg {
+        width: 48px;
+        height: 48px;
+    }
+
+    .texto-boton {
+        gap: 22px;
+    }
+
+    .texto-boton strong {
+        font-size: 13px;
+    }
+
+    .texto-boton small {
+        font-size: 11px;
+    }
+
+    .agradecimiento {
+        margin-top: 74px;
+    }
+
+    .monograma {
+        margin-top: 63px;
+    }
+}
