@@ -112,6 +112,7 @@ main {
     padding: 30px 30px 24px;
     background: var(--marfil);
     text-align: center;
+    padding-bottom: 30px;
 }
 
 .container {
