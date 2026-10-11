@@ -1,50 +1,186 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <meta name="theme-color" content="#f5f0e6">
-    <meta name="description"
-          content="Comparte tus fotografías y videos de la boda de Karla y Ricardo.">
 
-    <title>Karla & Ricardo | Nuestros recuerdos</title>
+    <meta name="description"
+          content="Comparte las fotografías y videos de la boda de Karla y Ricardo.">
+
+    <title>Karla &amp; Ricardo | Nuestros recuerdos</title>
+
+    <!-- TIPOGRAFÍAS -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Dancing+Script:wght@400;500&display=swap"
-          rel="stylesheet">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
-    <link rel="stylesheet" href="styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- ICONOS -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- ESTILOS -->
+
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <main class="pagina">
+    <main>
 
-        <!-- PORTADA FOTOGRÁFICA -->
+        <!-- 1. PORTADA FOTOGRÁFICA -->
 
-        <section class="portada" aria-label="Karla y Ricardo">
+        <section class="hero">
 
-            <div class="portada-foto"></div>
+            <picture class="hero-picture">
 
-            <div class="portada-contenido">
+                <source
+                    media="(max-width: 600px)"
+                    srcset="img/portada-mobil.png">
 
-                <p class="portada-frase">
-                    Nuestra historia
+                <img
+                    src="img/portada-pc.png"
+                    class="hero-img"
+                    alt="Portada de la boda de Karla y Ricardo">
+
+            </picture>
+
+            <div class="overlay"></div>
+
+            <div class="hero-content">
+
+                <p class="hero-frase">
+                    Nuestra historia de amor
                 </p>
 
                 <h1>
-                    Karla <span>&</span> Ricardo
+                    Karla &amp; Ricardo
                 </h1>
 
                 <p class="fecha">
                     05 · DICIEMBRE · 2026
                 </p>
 
-                <div class="adorno-portada" aria-hidden="true">
-                    ❧
+            </div>
+
+        </section>
+
+
+        <!-- 2. MENSAJE -->
+
+        <section class="mensaje">
+
+            <div class="container">
+
+                <p class="sobrelinea">
+                    UN DÍA ESPECIAL
+                </p>
+
+                <h2 class="invitacion-boda">
+                    Merece recuerdos para toda la vida
+                </h2>
+
+                <div class="separador" aria-hidden="true">
+                    <span></span>
+                    <i class="fa-solid fa-leaf"></i>
+                    <span></span>
+                </div>
+
+                <p class="mensaje-texto">
+                    Queremos volver a vivir cada instante de nuestra
+                    boda a través de sus ojos.
+                </p>
+
+                <p class="mensaje-secundario">
+                    Compartan las fotografías y los videos que
+                    capturaron durante este día tan especial.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- 3. CUADRO PARA SELECCIONAR FOTOS Y VIDEOS -->
+
+        <section class="recuerdos">
+
+            <div class="container">
+
+                <p class="recuerdos-etiqueta">
+                    NUESTROS RECUERDOS
+                </p>
+
+                <h2 class="recuerdos-titulo">
+                    Comparte tus recuerdos
+                </h2>
+
+                <p class="recuerdos-descripcion">
+                    Nos encantará guardar los momentos especiales
+                    que compartimos con ustedes.
+                </p>
+
+                <div class="cuadro-subida">
+
+                    <div class="icono-fotografia"
+                         aria-hidden="true">
+
+                        <i class="fa-regular fa-images"></i>
+
+                    </div>
+
+                    <p class="subida-titulo">
+                        Tus fotos y videos
+                    </p>
+
+                    <p class="subida-descripcion">
+                        Selecciona los recuerdos que quieras compartir.
+                    </p>
+
+                    <button
+                        type="button"
+                        id="seleccionar-archivos"
+                        class="btn-recuerdos">
+
+                        <i class="fa-solid fa-cloud-arrow-up"
+                           aria-hidden="true"></i>
+
+                        <span>
+                            COMPARTIR MIS RECUERDOS
+                        </span>
+
+                    </button>
+
+                    <input
+                        type="file"
+                        id="archivos"
+                        accept="image/*,video/*"
+                        multiple
+                        hidden>
+
+                    <p class="nota-archivos">
+                        Puedes seleccionar varias fotografías y videos.
+                    </p>
+
+                    <p
+                        id="estado-archivos"
+                        class="estado-archivos"
+                        aria-live="polite">
+                    </p>
+
                 </div>
 
             </div>
@@ -52,135 +188,30 @@
         </section>
 
 
-        <!-- TARJETA PRINCIPAL -->
+        <!-- 4. AGRADECIMIENTO FINAL -->
 
-        <section class="tarjeta">
+        <footer class="agradecimiento">
 
-            <p class="sobrelinea">
-                UN DÍA ESPECIAL
-            </p>
+            <div class="container">
 
-            <h2 class="titulo-tarjeta">
-                merece recuerdos para toda la vida.
-            </h2>
+                <p class="agradecimiento-texto">
+                    Gracias por ser parte de nuestra historia de amor.
+                </p>
 
-            <div class="separador" aria-hidden="true">
-                <span></span>
-                <span class="ramita">❧</span>
-                <span></span>
+                <p class="firma">
+                    Karla &amp; Ricardo
+                </p>
+
             </div>
 
-            <p class="mensaje">
-                Queremos volver a vivir cada instante de nuestra boda
-                a través de sus ojos.
-            </p>
-
-            <p class="mensaje secundario">
-                Compartan con nosotros las fotografías y los videos
-                que capturaron durante este día tan especial.
-            </p>
-
-
-            <!-- BOTÓN DE SELECCIÓN DE ARCHIVOS -->
-
-            <button
-                class="boton-subida"
-                id="seleccionar-archivos"
-                type="button"
-                aria-label="Seleccionar fotografías y videos">
-
-                <span class="icono-subida" aria-hidden="true">
-
-                    <svg viewBox="0 0 48 48"
-                         xmlns="http://www.w3.org/2000/svg"
-                         fill="none">
-
-                        <path
-                            d="M13 34H10a8 8 0 0 1 0-16
-                               14 14 0 0 1 27-2
-                               9 9 0 0 1 1 18h-4"
-                            stroke="currentColor"
-                            stroke-width="1.7"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"/>
-
-                        <path
-                            d="M24 40V22m0 0-7 7m7-7 7 7"
-                            stroke="currentColor"
-                            stroke-width="1.7"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"/>
-
-                    </svg>
-
-                </span>
-
-                <span class="texto-boton">
-
-                    <strong>
-                        COMPARTIR MIS RECUERDOS
-                    </strong>
-
-                    <small>
-                        FOTOGRAFÍAS Y VIDEOS
-                    </small>
-
-                </span>
-
-                <span class="flecha" aria-hidden="true">
-                    →
-                </span>
-
-            </button>
-
-
-            <input
-                id="archivos"
-                type="file"
-                accept="image/*,video/*"
-                multiple
-                hidden>
-
-
-            <p class="nota-archivos">
-                Puedes seleccionar varios archivos a la vez.
-            </p>
-
-            <p
-                id="estado-archivos"
-                class="estado-archivos"
-                aria-live="polite">
-            </p>
-
-
-            <!-- MENSAJE FINAL -->
-
-            <div class="adorno-final" aria-hidden="true">
-                <span></span>
-                <span>❧</span>
-                <span></span>
-            </div>
-
-            <p class="agradecimiento">
-                Gracias por formar parte
-                <br>
-                de nuestra historia de amor.
-            </p>
-
-            <p class="firma">
-                Con cariño, Karla & Ricardo
-            </p>
-
-        </section>
-
-
-        <footer class="pie">
-            KARLA & RICARDO · 05.12.2026
         </footer>
 
     </main>
 
-    <script src="script.js"></script>
+    <!-- JAVASCRIPT -->
+
+    <script src="js/script.js"></script>
 
 </body>
+
 </html>
