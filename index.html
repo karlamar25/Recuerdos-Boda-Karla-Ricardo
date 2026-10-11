@@ -92,53 +92,36 @@
         </section>
 
 
-        <!-- SECCIÓN 3: SELECCIONAR FOTOGRAFÍAS Y VIDEOS -->
+                <!-- SECCIÓN 3: SUBIR FOTOGRAFÍAS Y VIDEOS -->
 
         <section class="recuerdos">
 
             <div class="container">
 
-                <div class="cuadro-subida">
+                <button
+                    type="button"
+                    id="seleccionar-archivos"
+                    class="btn-recuerdos">
 
-                    <div class="icono-fotografia"
-                         aria-hidden="true">
+                    <i class="fa-solid fa-cloud-arrow-up"
+                       aria-hidden="true"></i>
 
-                        <i class="fa-regular fa-images"></i>
+                    <span>SUBIR FOTOS Y VIDEOS</span>
 
-                    </div>
+                </button>
 
-                    <button
-                        type="button"
-                        id="seleccionar-archivos"
-                        class="btn-recuerdos">
+                <input
+                    type="file"
+                    id="archivos"
+                    accept="image/*,video/*"
+                    multiple
+                    hidden>
 
-                        <i class="fa-solid fa-cloud-arrow-up"
-                           aria-hidden="true"></i>
-
-                        <span>
-                            COMPARTIR MIS RECUERDOS
-                        </span>
-
-                    </button>
-
-                    <input
-                        type="file"
-                        id="archivos"
-                        accept="image/*,video/*"
-                        multiple
-                        hidden>
-
-                    <p class="nota-archivos">
-                        Puedes seleccionar varias fotografías y videos.
-                    </p>
-
-                    <p
-                        id="estado-archivos"
-                        class="estado-archivos"
-                        aria-live="polite">
-                    </p>
-
-                </div>
+                <p
+                    id="estado-archivos"
+                    class="estado-archivos"
+                    aria-live="polite">
+                </p>
 
             </div>
 
