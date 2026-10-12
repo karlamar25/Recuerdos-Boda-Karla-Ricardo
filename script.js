@@ -198,7 +198,7 @@ selector.addEventListener("change", async function () {
             const agradecimiento = document.createElement("p");
 
             agradecimiento.textContent =
-                "¡Gracias por compartir estos recuerdos con nosotros! ❤️";
+                "¡Gracias por compartir estos recuerdos con nosotros!";
 
             agradecimiento.style.cssText = `
                 margin: 16px 0 0;
