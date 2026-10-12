@@ -74,7 +74,8 @@ selector.addEventListener("change", async function () {
     barraFondo.appendChild(barra);
 
     const contador = document.createElement("p");
-    contador.textContent = `0 de ${archivos.length} archivos completados`;
+    contador.textContent =
+        `0 de ${archivos.length} archivos completados`;
     contador.style.cssText = `
         margin: 0 0 16px;
         font-size: 14px;
@@ -90,7 +91,7 @@ selector.addEventListener("change", async function () {
     panel.append(titulo, mensaje, barraFondo, contador, lista);
     estado.appendChild(panel);
 
-    // Evita que se inicie otra selección mientras se suben archivos.
+    // Evita iniciar otra selección durante la subida.
     boton.disabled = true;
     selector.disabled = true;
 
@@ -113,8 +114,10 @@ selector.addEventListener("change", async function () {
 
             if (archivo.size === 0 || archivo.size > MAX_FILE_SIZE) {
                 fallidos++;
+
                 linea.textContent =
                     `✗ ${archivo.name}: está vacío o supera el límite de 50 MB.`;
+
                 linea.style.color = "#a32626";
                 continue;
             }
@@ -137,7 +140,9 @@ selector.addEventListener("change", async function () {
                 try {
                     resultado = await respuesta.json();
                 } catch {
-                    throw new Error("El servidor no devolvió una respuesta válida.");
+                    throw new Error(
+                        "El servidor no devolvió una respuesta válida."
+                    );
                 }
 
                 if (!respuesta.ok || !resultado.success) {
@@ -148,7 +153,9 @@ selector.addEventListener("change", async function () {
 
                 exitosos++;
 
-                linea.textContent = `✓ ${archivo.name}: guardado correctamente`;
+                linea.textContent =
+                    `✓ ${archivo.name}: guardado correctamente`;
+
                 linea.style.color = "#28633b";
 
             } catch (error) {
@@ -158,15 +165,18 @@ selector.addEventListener("change", async function () {
 
                 linea.textContent =
                     `✗ ${archivo.name}: no se pudo subir. Inténtalo de nuevo.`;
+
                 linea.style.color = "#a32626";
             }
 
             const completados = exitosos + fallidos;
+
             const porcentaje = Math.round(
                 (completados / archivos.length) * 100
             );
 
             barra.style.width = `${porcentaje}%`;
+
             contador.textContent =
                 `${completados} de ${archivos.length} archivos procesados`;
         }
@@ -174,20 +184,48 @@ selector.addEventListener("change", async function () {
         barra.style.width = "100%";
 
         if (fallidos === 0) {
-            titulo.textContent = "¡Tus recuerdos se guardaron con éxito! ❤️";
+            // TODOS los archivos se subieron correctamente.
+            titulo.textContent =
+                "¡Tus recuerdos se guardaron con éxito! ❤️";
+
             mensaje.textContent =
                 `¡Listo! Los ${exitosos} archivo(s) se subieron correctamente.`;
+
             contador.textContent = "✓ Carga completada";
             barra.style.background = "#3d8050";
+
+            // Agradecimiento final
+            const agradecimiento = document.createElement("p");
+
+            agradecimiento.textContent =
+                "¡Gracias por compartir estos recuerdos con nosotros! ❤️";
+
+            agradecimiento.style.cssText = `
+                margin: 16px 0 0;
+                font-size: 17px;
+                line-height: 1.6;
+            `;
+
+            panel.appendChild(agradecimiento);
+
         } else if (exitosos === 0) {
-            titulo.textContent = "No se pudieron subir tus archivos";
+            // Ningún archivo se subió correctamente.
+            titulo.textContent =
+                "No se pudieron subir tus archivos";
+
             mensaje.textContent =
                 "No se guardó ningún archivo. Comprueba los mensajes e inténtalo de nuevo.";
+
             barra.style.background = "#b33b3b";
+
         } else {
-            titulo.textContent = "La subida terminó con algunos problemas";
+            // Algunos archivos se subieron y otros fallaron.
+            titulo.textContent =
+                "La subida terminó con algunos problemas";
+
             mensaje.textContent =
                 `Se guardaron ${exitosos} archivo(s), pero ${fallidos} no se pudieron subir. Revisa los mensajes anteriores.`;
+
             barra.style.background = "#b47a32";
         }
 
