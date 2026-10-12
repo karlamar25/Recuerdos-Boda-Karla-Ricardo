@@ -2,212 +2,410 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administración | Recuerdos de nuestra boda</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mis recuerdos | Karla y Ricardo</title>
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
             padding: 24px;
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
             background: #f7f3ef;
             color: #493c35;
+            font-family: Arial, sans-serif;
         }
 
         main {
-            width: 100%;
-            max-width: 560px;
-            margin: 50px auto;
-            padding: 32px;
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+
+        header, .card {
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            padding: 24px;
+            border-radius: 14px;
+            box-shadow: 0 5px 22px #0000000d;
+            margin-bottom: 20px;
         }
 
-        h1 {
-            text-align: center;
-            font-size: 26px;
-        }
+        h1, h2 { color: #71594a; }
 
-        p {
-            line-height: 1.6;
+        #login {
+            max-width: 480px;
+            margin: 50px auto;
         }
 
         label {
             display: block;
-            margin-top: 18px;
-            margin-bottom: 7px;
+            margin: 16px 0 7px;
         }
 
         input {
             width: 100%;
             padding: 12px;
             border: 1px solid #d5c9c1;
-            border-radius: 8px;
+            border-radius: 7px;
             font-size: 16px;
         }
 
         button {
-            width: 100%;
-            margin-top: 20px;
-            padding: 13px;
             border: 0;
-            border-radius: 8px;
+            border-radius: 7px;
+            padding: 12px 16px;
             background: #71594a;
             color: white;
-            font-size: 16px;
             cursor: pointer;
+            font-size: 15px;
         }
 
         button:disabled {
-            opacity: 0.6;
+            opacity: .6;
             cursor: wait;
         }
 
-        #mensaje {
-            margin-top: 18px;
+        .primary {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        #galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 18px;
+        }
+
+        .archivo {
+            background: white;
+            border-radius: 12px;
+            padding: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px #0000000d;
+        }
+
+        .archivo img, .archivo video {
+            width: 100%;
+            max-height: 280px;
+            object-fit: contain;
+            background: #eee8e3;
+            border-radius: 8px;
+        }
+
+        .nombre {
             overflow-wrap: anywhere;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .descargar {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        #mensaje {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            line-height: 1.5;
         }
 
         .nota {
-            margin-top: 24px;
             font-size: 13px;
             color: #75675e;
+            line-height: 1.5;
         }
 
-        #panel {
-            display: none;
+        [hidden] { display: none !important; }
+
+        @media (max-width: 600px) {
+            body { padding: 12px; }
+            header, .card { padding: 18px; }
         }
     </style>
 </head>
 
 <body>
-    <main>
-        <h1>Recuerdos de nuestra boda</h1>
+<main>
+    <section id="login" class="card">
+        <h1>Mis recuerdos de boda</h1>
         <p>Acceso privado para administrar las fotografías y los videos.</p>
 
         <form id="formulario">
             <label for="correo">Correo electrónico</label>
-            <input
-                id="correo"
-                type="email"
-                autocomplete="username"
-                required
-            >
+            <input id="correo" type="email" autocomplete="username" required>
 
             <label for="contrasena">Contraseña</label>
-            <input
-                id="contrasena"
-                type="password"
-                autocomplete="current-password"
-                required
-            >
+            <input id="contrasena" type="password"
+                   autocomplete="current-password" required>
 
-            <button id="entrar" type="submit">Iniciar sesión</button>
+            <button id="entrar" class="primary" type="submit">
+                Iniciar sesión
+            </button>
         </form>
 
-        <p id="mensaje" role="status" aria-live="polite"></p>
+        <p id="mensajeLogin" role="status" aria-live="polite"></p>
+    </section>
 
-        <section id="panel">
-            <h2>Sesión iniciada</h2>
-            <p id="usuario"></p>
-            <p>El acceso está autenticado. La galería privada se configurará en el siguiente paso.</p>
-            <button id="salir" type="button">Cerrar sesión</button>
+    <section id="administracion" hidden>
+        <header>
+            <div class="topbar">
+                <div>
+                    <h1>Recuerdos de Karla y Ricardo</h1>
+                    <p id="usuario"></p>
+                </div>
+                <button id="cerrarSesion" type="button">Cerrar sesión</button>
+            </div>
+            <p>Galería privada de fotografías y videos.</p>
+            <button id="actualizar" type="button">Actualizar galería</button>
+            <p id="mensaje" role="status" aria-live="polite"></p>
+        </header>
+
+        <section class="card">
+            <h2>Archivos guardados</h2>
+            <div id="galeria"></div>
+            <p class="nota">
+                Los archivos se solicitan desde el almacenamiento privado.
+                Las descargas se generan mediante tu sesión autenticada.
+            </p>
         </section>
+    </section>
+</main>
 
-        <p class="nota">
-            Esta página es independiente de la página pública de recuerdos.
-        </p>
-    </main>
+<script type="module">
+    import { createClient } from
+        "https://esm.sh/@supabase/supabase-js@2";
 
-    <script type="module">
-        import { createClient } from
-            "https://esm.sh/@supabase/supabase-js@2";
+    const SUPABASE_URL =
+        "https://jwkorzxsckcrpsdrvsfv.supabase.co";
 
-        const SUPABASE_URL =
-            "https://jwkorzxsckcrpsdrvsfv.supabase.co";
+    const SUPABASE_KEY =
+        "sb_publishable_t-MzMqmI7B_QUXmWrzDU-w_d_clAFeP";
 
-        // La clave publishable es pública; nunca pongas aquí una service_role.
-        const SUPABASE_PUBLISHABLE_KEY =
-            "sb_publishable_t-MzMqmI7B_QUXmWrzDU-w_d_clAFeP";
+    const BUCKET = "recuerdos-boda";
+    const CARPETA = "uploads";
 
-        const supabase = createClient(
-            SUPABASE_URL,
-            SUPABASE_PUBLISHABLE_KEY
-        );
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        const formulario = document.getElementById("formulario");
-        const correo = document.getElementById("correo");
-        const contrasena = document.getElementById("contrasena");
-        const boton = document.getElementById("entrar");
-        const mensaje = document.getElementById("mensaje");
-        const panel = document.getElementById("panel");
-        const usuario = document.getElementById("usuario");
+    const login = document.getElementById("login");
+    const administracion = document.getElementById("administracion");
+    const formulario = document.getElementById("formulario");
+    const mensajeLogin = document.getElementById("mensajeLogin");
+    const mensaje = document.getElementById("mensaje");
+    const galeria = document.getElementById("galeria");
+    const botonEntrar = document.getElementById("entrar");
 
-        function mostrarSesion(email) {
-            formulario.style.display = "none";
-            panel.style.display = "block";
-            usuario.textContent = "Sesión iniciada como: " + email;
+    let usuarioActual = null;
+    let urlsTemporales = [];
+
+    function limpiarGaleria() {
+        urlsTemporales.forEach(url => URL.revokeObjectURL(url));
+        urlsTemporales = [];
+        galeria.replaceChildren();
+    }
+
+    function mostrarLogin() {
+        limpiarGaleria();
+        login.hidden = false;
+        administracion.hidden = true;
+        usuarioActual = null;
+    }
+
+    function mostrarAdministracion(user) {
+        usuarioActual = user;
+        login.hidden = true;
+        administracion.hidden = false;
+        document.getElementById("usuario").textContent =
+            "Sesión iniciada: " + user.email;
+    }
+
+    async function comprobarUsuario() {
+        const { data, error } = await supabase.auth.getUser();
+
+        if (error || !data.user) {
+            mostrarLogin();
+            return;
         }
 
-        async function comprobarSesion() {
-            const { data, error } = await supabase.auth.getUser();
+        mostrarAdministracion(data.user);
+        await cargarGaleria();
+    }
 
-            if (!error && data.user) {
-                mostrarSesion(data.user.email);
-            }
+    formulario.addEventListener("submit", async event => {
+        event.preventDefault();
+
+        if (SUPABASE_KEY.includes("PEGA_AQUI")) {
+            mensajeLogin.textContent =
+                "Falta configurar la clave pública de Supabase en admin.html.";
+            return;
         }
 
-        formulario.addEventListener("submit", async function (evento) {
-            evento.preventDefault();
+        botonEntrar.disabled = true;
+        mensajeLogin.textContent = "Iniciando sesión...";
 
-            if (SUPABASE_PUBLISHABLE_KEY.includes("PEGA_AQUI")) {
+        try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: document.getElementById("correo").value.trim(),
+                password: document.getElementById("contrasena").value
+            });
+
+            if (error) throw error;
+
+            document.getElementById("contrasena").value = "";
+            mensajeLogin.textContent = "";
+
+            mostrarAdministracion(data.user);
+            await cargarGaleria();
+        } catch (error) {
+            console.error(error);
+            mensajeLogin.textContent =
+                "No se pudo iniciar sesión. Comprueba tus datos e inténtalo de nuevo.";
+        } finally {
+            botonEntrar.disabled = false;
+        }
+    });
+
+    async function cargarGaleria() {
+        limpiarGaleria();
+        mensaje.textContent = "Buscando archivos...";
+
+        try {
+            const { data, error } = await supabase.storage
+                .from(BUCKET)
+                .list(CARPETA, {
+                    limit: 100,
+                    offset: 0,
+                    sortBy: { column: "name", order: "asc" }
+                });
+
+            if (error) throw error;
+
+            const archivos = (data || []).filter(archivo =>
+                archivo.name && archivo.name !== ".emptyFolderPlaceholder"
+            );
+
+            if (archivos.length === 0) {
                 mensaje.textContent =
-                    "Falta configurar la clave publishable de Supabase.";
+                    "No se encontraron archivos en la carpeta uploads.";
                 return;
             }
 
-            boton.disabled = true;
-            mensaje.textContent = "Verificando acceso...";
+            mensaje.textContent =
+                `Se encontraron ${archivos.length} archivo(s).`;
 
-            try {
-                const { data, error } =
-                    await supabase.auth.signInWithPassword({
-                        email: correo.value.trim(),
-                        password: contrasena.value
-                    });
+            for (const archivo of archivos) {
+                const ruta = `${CARPETA}/${archivo.name}`;
+                const tarjeta = document.createElement("article");
+                tarjeta.className = "archivo";
 
-                if (error) throw error;
+                const nombre = document.createElement("p");
+                nombre.className = "nombre";
+                nombre.textContent = archivo.name;
+                tarjeta.appendChild(nombre);
 
-                mensaje.textContent = "";
-                mostrarSesion(data.user.email);
-                contrasena.value = "";
-            } catch (error) {
-                mensaje.textContent =
-                    "No se pudo iniciar sesión. Comprueba el correo y la contraseña.";
-                console.error("Error de inicio de sesión:", error);
-            } finally {
-                boton.disabled = false;
+                const tipo = archivo.metadata?.mimetype || "";
+                const esImagen = tipo.startsWith("image/");
+                const esVideo = tipo.startsWith("video/");
+
+                if (esImagen || esVideo) {
+                    const { data: blob, error: errorDescarga } =
+                        await supabase.storage
+                            .from(BUCKET)
+                            .download(ruta);
+
+                    if (!errorDescarga && blob) {
+                        const url = URL.createObjectURL(blob);
+                        urlsTemporales.push(url);
+
+                        const vista = document.createElement(
+                            esVideo ? "video" : "img"
+                        );
+
+                        vista.src = url;
+
+                        if (esVideo) {
+                            vista.controls = true;
+                            vista.preload = "metadata";
+                        } else {
+                            vista.alt = archivo.name;
+                            vista.loading = "lazy";
+                        }
+
+                        tarjeta.prepend(vista);
+                    }
+                }
+
+                const boton = document.createElement("button");
+                boton.className = "descargar";
+                boton.textContent = "Descargar original";
+
+                boton.addEventListener("click", async () => {
+                    boton.disabled = true;
+                    boton.textContent = "Preparando descarga...";
+
+                    try {
+                        const { data, error } = await supabase.storage
+                            .from(BUCKET)
+                            .download(ruta);
+
+                        if (error) throw error;
+
+                        const url = URL.createObjectURL(data);
+                        urlsTemporales.push(url);
+
+                        const enlace = document.createElement("a");
+                        enlace.href = url;
+                        enlace.download = archivo.name;
+                        document.body.appendChild(enlace);
+                        enlace.click();
+                        enlace.remove();
+
+                        boton.textContent = "Descarga iniciada";
+                    } catch (error) {
+                        console.error(error);
+                        boton.textContent = "Error al descargar";
+                        mensaje.textContent =
+                            "No se pudo descargar el archivo. Revisa la sesión y los permisos.";
+                    } finally {
+                        boton.disabled = false;
+                    }
+                });
+
+                tarjeta.appendChild(boton);
+                galeria.appendChild(tarjeta);
             }
-        });
+        } catch (error) {
+            console.error(error);
+            mensaje.textContent =
+                "No se pudo cargar la galería. Comprueba la política SELECT y que tu sesión siga activa.";
+        }
+    }
 
-        document.getElementById("salir").addEventListener(
-            "click",
-            async function () {
-                await supabase.auth.signOut();
-                panel.style.display = "none";
-                formulario.style.display = "block";
-                contrasena.value = "";
-                mensaje.textContent = "Sesión cerrada.";
-            }
-        );
+    document.getElementById("actualizar").addEventListener(
+        "click", cargarGaleria
+    );
 
-        comprobarSesion();
-    </script>
+    document.getElementById("cerrarSesion").addEventListener(
+        "click", async () => {
+            await supabase.auth.signOut();
+            mostrarLogin();
+            mensajeLogin.textContent = "Sesión cerrada.";
+        }
+    );
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+        if (!session) mostrarLogin();
+    });
+
+    if (!SUPABASE_KEY.includes("PEGA_AQUI")) {
+        comprobarUsuario();
+    }
+</script>
 </body>
 </html>
