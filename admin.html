@@ -150,7 +150,23 @@
             </button>
         </form>
 
+        <button id="olvidoContrasena" type="button" class="primary" style="background: transparent; color: #71594a; border: 1px solid #d5c9c1; margin-top: 10px;">
+            Olvidé mi contraseña
+        </button>
         <p id="mensajeLogin" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="recuperar" class="card" hidden>
+        <h1>Crear nueva contraseña</h1>
+        <p>Escribe una contraseña nueva para tu acceso privado.</p>
+        <form id="formularioNuevaContrasena">
+            <label for="nuevaContrasena">Nueva contraseña</label>
+            <input id="nuevaContrasena" type="password" autocomplete="new-password" minlength="8" required>
+            <label for="confirmarContrasena">Confirmar contraseña</label>
+            <input id="confirmarContrasena" type="password" autocomplete="new-password" minlength="8" required>
+            <button id="guardarContrasena" class="primary" type="submit">Guardar nueva contraseña</button>
+        </form>
+        <p id="mensajeRecuperacion" role="status" aria-live="polite"></p>
     </section>
 
     <section id="administracion" hidden>
@@ -194,6 +210,10 @@
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
     const login = document.getElementById("login");
+    const recuperar = document.getElementById("recuperar");
+    const formularioNuevaContrasena = document.getElementById("formularioNuevaContrasena");
+    const mensajeRecuperacion = document.getElementById("mensajeRecuperacion");
+    const botonGuardarContrasena = document.getElementById("guardarContrasena");
     const administracion = document.getElementById("administracion");
     const formulario = document.getElementById("formulario");
     const mensajeLogin = document.getElementById("mensajeLogin");
@@ -213,13 +233,23 @@
     function mostrarLogin() {
         limpiarGaleria();
         login.hidden = false;
+        recuperar.hidden = true;
         administracion.hidden = true;
         usuarioActual = null;
+    }
+
+    function mostrarFormularioRecuperacion() {
+        limpiarGaleria();
+        login.hidden = true;
+        recuperar.hidden = false;
+        administracion.hidden = true;
+        mensajeRecuperacion.textContent = "";
     }
 
     function mostrarAdministracion(user) {
         usuarioActual = user;
         login.hidden = true;
+        recuperar.hidden = true;
         administracion.hidden = false;
         document.getElementById("usuario").textContent =
             "Sesión iniciada: " + user.email;
@@ -236,6 +266,67 @@
         mostrarAdministracion(data.user);
         await cargarGaleria();
     }
+
+    document.getElementById("olvidoContrasena").addEventListener("click", async () => {
+        const email = document.getElementById("correo").value.trim();
+        if (!email) {
+            mensajeLogin.textContent = "Escribe primero tu correo electrónico y vuelve a pulsar aquí.";
+            document.getElementById("correo").focus();
+            return;
+        }
+
+        const boton = document.getElementById("olvidoContrasena");
+        boton.disabled = true;
+        mensajeLogin.textContent = "Solicitando enlace de recuperación...";
+        try {
+            const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                redirectTo: window.location.origin + "/admin.html"
+            });
+            if (error) throw error;
+            mensajeLogin.textContent = "Si el correo está registrado, recibirás un enlace. Revisa tu bandeja de entrada y spam.";
+        } catch (error) {
+            console.error(error);
+            mensajeLogin.textContent = error.message?.includes("rate limit")
+                ? "Supabase ha limitado temporalmente los correos. Espera antes de volver a intentarlo."
+                : "No se pudo solicitar el correo de recuperación. Inténtalo más tarde.";
+        } finally {
+            boton.disabled = false;
+        }
+    });
+
+    formularioNuevaContrasena.addEventListener("submit", async event => {
+        event.preventDefault();
+        const nueva = document.getElementById("nuevaContrasena").value;
+        const confirmar = document.getElementById("confirmarContrasena").value;
+        if (nueva.length < 8) {
+            mensajeRecuperacion.textContent = "La contraseña debe tener al menos 8 caracteres.";
+            return;
+        }
+        if (nueva !== confirmar) {
+            mensajeRecuperacion.textContent = "Las contraseñas no coinciden.";
+            return;
+        }
+
+        botonGuardarContrasena.disabled = true;
+        mensajeRecuperacion.textContent = "Guardando contraseña...";
+        try {
+            const { error } = await supabase.auth.updateUser({ password: nueva });
+            if (error) throw error;
+            document.getElementById("nuevaContrasena").value = "";
+            document.getElementById("confirmarContrasena").value = "";
+            mensajeRecuperacion.textContent = "Contraseña actualizada. Ya puedes iniciar sesión con tu nueva contraseña.";
+            await supabase.auth.signOut();
+            setTimeout(() => {
+                mostrarLogin();
+                mensajeLogin.textContent = "Contraseña actualizada. Inicia sesión con tu nueva contraseña.";
+            }, 1800);
+        } catch (error) {
+            console.error(error);
+            mensajeRecuperacion.textContent = "El enlace puede haber caducado. Solicita uno nuevo cuando Supabase permita enviar correos.";
+        } finally {
+            botonGuardarContrasena.disabled = false;
+        }
+    });
 
     formulario.addEventListener("submit", async event => {
         event.preventDefault();
@@ -399,7 +490,11 @@
         }
     );
 
-    supabase.auth.onAuthStateChange((_event, session) => {
+    supabase.auth.onAuthStateChange((event, session) => {
+        if (event === "PASSWORD_RECOVERY") {
+            mostrarFormularioRecuperacion();
+            return;
+        }
         if (!session) mostrarLogin();
     });
 
